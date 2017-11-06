@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.lang.reflect.InvocationTargetException;
+import org.json.JSONObject;
 
 /**
  * Created by rotemm on 10/10/2016.
@@ -21,6 +22,26 @@ import java.lang.reflect.InvocationTargetException;
 public abstract class Target {
 
     Object value;
+
+    public static Target getTarget(JSONObject target) {
+        String type = target.getString("type");
+        switch (type) {
+            case "Class":
+                String value = target.getString("value");
+                return new ClassTarget(value);
+            break;
+
+            case "Invocation":
+                JSONObject objectValue = target.getJSONObject("value");
+                return new InvocationTarget(new Invocation(objectValue));
+            break;
+
+            case "Espresso":
+                String stringValue = target.getString("value");
+                return new ObjectInstanceTarget(stringValue);
+            break;
+        }
+    }
 
     public Target(Object value) {
         this.value = value;

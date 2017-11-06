@@ -6,6 +6,8 @@ import com.wix.invoke.parser.JsonParser;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import org.json.JSONObject;
+import org.json.JSONArray;
 
 /**
  * Created by rotemm on 10/10/2016.
@@ -24,6 +26,17 @@ public class Invocation {
         this.target = target;
         this.method = method;
         this.args = args;
+    }
+
+    public Invocation(JSONObject json) {
+        this.target = Target.getTarget(json.getJSONObject("target"));
+        this.method = json.getString("method");
+        JSONArray args = json.getJSONArray("args");
+        Object[] transformedArgs = new Object[args.length()];
+        for (int i = 0; i < args.length(); i++) {
+            transformedArgs[i] = args.get(i);
+        }
+        this.args = transformedArgs;
     }
 
     public String getMethod() {

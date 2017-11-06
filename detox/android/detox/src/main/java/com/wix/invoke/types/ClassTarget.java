@@ -15,7 +15,6 @@ import java.util.Arrays;
  */
 public class ClassTarget extends Target {
 
-
     @JsonCreator
     public ClassTarget(@JsonProperty("value") Object value) {
         super(value);

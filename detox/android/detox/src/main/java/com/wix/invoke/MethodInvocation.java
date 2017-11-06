@@ -31,7 +31,7 @@ public class MethodInvocation {
 
     public static Object invoke(String invocationJson, Class<?> extendWith) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         JsonParser parser = getParserWithExtendedParsableTargetTypes(extendWith);
-        Invocation invocation = parser.parse(invocationJson, Invocation.class);
+        Invocation invocation = new Invocation(parser.parse(invocationJson, Invocation.class));
         return invoke(invocation);
     }
 
