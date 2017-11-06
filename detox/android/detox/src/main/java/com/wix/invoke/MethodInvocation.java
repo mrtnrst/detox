@@ -8,6 +8,7 @@ import com.wix.invoke.types.Target;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
+import org.json.JSONException;
 
 
 /**
@@ -25,11 +26,11 @@ public class MethodInvocation {
         return invoke(invocation);
     }
 
-    public static Object invoke(String invocationJson) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    public static Object invoke(String invocationJson) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, JSONException {
         return invoke(invocationJson, null);
     }
 
-    public static Object invoke(String invocationJson, Class<?> extendWith) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public static Object invoke(String invocationJson, Class<?> extendWith) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, JSONException {
         JsonParser parser = getParserWithExtendedParsableTargetTypes(extendWith);
         Invocation invocation = new Invocation(parser.parse(invocationJson, Invocation.class));
         return invoke(invocation);

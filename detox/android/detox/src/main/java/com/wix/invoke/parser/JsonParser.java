@@ -2,8 +2,8 @@ package com.wix.invoke.parser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
 import org.json.JSONObject;
+import org.json.JSONException;
 
 /**
  * Created by rotemm on 13/10/2016.
@@ -32,7 +32,7 @@ public class JsonParser {
         try {
             JSONObject obj = new JSONObject(jsonData);
             return obj;
-        } catch (IOException e) {
+        } catch (JSONException e) {
             throw new RuntimeException(e);
         }
     }

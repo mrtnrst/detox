@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import org.json.JSONObject;
 import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * Created by rotemm on 10/10/2016.
@@ -28,7 +29,7 @@ public class Invocation {
         this.args = args;
     }
 
-    public Invocation(JSONObject json) {
+    public Invocation(JSONObject json) throws JSONException {
         this.target = Target.getTarget(json.getJSONObject("target"));
         this.method = json.getString("method");
         JSONArray args = json.getJSONArray("args");
